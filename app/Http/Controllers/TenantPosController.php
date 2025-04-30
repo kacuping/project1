@@ -40,7 +40,7 @@ class TenantPosController extends Controller
         ]);
 
         foreach ($items as $item) {
-            $transaksi->transaksiDetails()->create([
+            $transaksi->transactionDetails()->create([
                 'produk_id' => $item['id'],
                 'jumlah' => $item['qty'],
                 'harga_satuan' => $item['price'],

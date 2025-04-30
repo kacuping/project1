@@ -8,7 +8,6 @@ use App\Http\Controllers\KasirController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\TenantPosController;
-use App\Http\Controllers\TenantOrderController;
 use App\Http\Controllers\TransactionController;
 
 // Route::get('/', function () {
@@ -57,13 +56,30 @@ Route::middleware(['auth'])->prefix('tenant')->name('tenant.')->group(function (
     Route::get('/transactions/{id}/print', [TransactionController::class, 'showStruk'])->name('tenant.struk');
 });
 
-Route::group(['middleware' => ['auth', 'role:kasir']], function () {
-    Route::get('/kasir', [KasirController::class, 'index'])->name('kasir.index');
-    Route::post('/kasir', [KasirController::class, 'store'])->name('kasir.store');
-    Route::get('/kasir/{id}/edit', [KasirController::class, 'edit'])->name('kasir.edit');
-    Route::put('/kasir/{id}', [KasirController::class, 'update'])->name('kasir.update');
-    Route::delete('/kasir/{id}', [KasirController::class, 'destroy'])->name('kasir.destroy');
-});
+// Route::group(['middleware' => ['auth', 'role:kasir']], function () {
+// Route::get('/kasir/transaksi-pending', [KasirController::class, 'pending']);
+//     Route::get('/kasir', [KasirController::class, 'index'])->name('kasir.index');
+//     Route::post('/kasir', [KasirController::class, 'store'])->name('kasir.store');
+//     Route::get('/kasir/{id}/edit', [KasirController::class, 'edit'])->name('kasir.edit');
+//     Route::put('/kasir/{id}', [KasirController::class, 'update'])->name('kasir.update');
+//     Route::delete('/kasir/{id}', [KasirController::class, 'destroy'])->name('kasir.destroy');
+// });
 
 Route::get('/tenant/transactions/{id}/print', [TransactionController::class, 'print'])
     ->name('tenant.transactions.print');
+
+Route::middleware(['auth', 'role:kasir'])->prefix('kasir')->name('kasir.')->group(function () {
+    Route::get('/pos-system', [KasirController::class, 'index'])->name('transaksi.index');
+    Route::post('/transaksi/{id}/bayar', [KasirController::class, 'bayar'])->name('transaksi.bayar');
+});
+    
+// Route::middleware(['auth', 'role:kasir'])->group(function () {
+//     Route::get('/kasir/transaksi-pending', [KasirController::class, 'pending']);
+// });
+// Route::group(['middleware' => ['auth', 'role:kasir']], function () {
+    // Route::get('/kasir/transaksi-pending', [KasirController::class, 'pending']);
+    // Route::post('/kasir', [KasirController::class, 'store'])->name('kasir.store');
+    // Route::get('/kasir/{id}/edit', [KasirController::class, 'edit'])->name('kasir.edit');
+    // Route::put('/kasir/{id}', [KasirController::class, 'update'])->name('kasir.update');
+    // Route::delete('/kasir/{id}', [KasirController::class, 'destroy'])->name('kasir.destroy');
+// });

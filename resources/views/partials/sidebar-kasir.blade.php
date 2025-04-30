@@ -7,8 +7,8 @@
         </a>
     </li>
 
-    <li class="menu-item {{ request()->is('') ? 'active' : '' }}">
-        <a href="{{ url('') }}" class="menu-link">
+    <li class="menu-item {{ request()->is('kasir*') ? 'active' : '' }}">
+        <a href="{{ url('/pos-system') }}" class="menu-link">
             <i class="menu-icon bx bx-bxs-cart-add"></i>
             <div>POS System</div>
         </a>

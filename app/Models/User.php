@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Tenant::class);
     }
+
+    public function hasRole($role)
+    {
+        return $this->role === $role; // Atau sesuaikan dengan logika role yang Anda gunakan
+    }
 }

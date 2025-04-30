@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\TransactionDetail;
 
 class Transaction extends Model
 {
@@ -18,9 +20,14 @@ class Transaction extends Model
     ];
 
 
-    public function details()
+    // public function details()
+    // {
+    //     return $this->hasMany(TransactionDetail::class, 'transaction_id');
+    // }
+
+    public function transactionDetails(): HasMany
     {
-        return $this->hasMany(TransactionDetail::class, 'transaction_id');
+        return $this->hasMany(TransactionDetail::class);
     }
 
     public function tenant()

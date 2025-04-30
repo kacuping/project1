@@ -73,7 +73,7 @@
         </div>
 
         <div class="items">
-            @foreach ($transaction->transaksiDetails as $detail)
+            @foreach ($transaction->transactionDetails as $detail)
                 <div class="item">
                     <p>{{ $detail->produk->nama }}</p>
                     <p>{{ $detail->jumlah }} x {{ number_format($detail->harga_satuan, 0, ',', '.') }} =
