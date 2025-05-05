@@ -9,6 +9,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\TenantPosController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\TenantTransactionController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -81,6 +82,11 @@ Route::middleware(['auth'])->group(function () {
 
 Route::prefix('kasir')->middleware(['auth', 'role:kasir'])->group(function () {
     Route::get('/dashboard', [KasirController::class, 'index'])->name('kasir.dashboard');
+});
+
+Route::prefix('tenant')->middleware(['auth', 'role:tenant'])->group(function () {
+    Route::get('/status-order', [TenantTransactionController::class, 'index'])->name('tenant.orders.status');
+    Route::post('/cancel-order/{id}', [TenantTransactionController::class, 'cancel'])->name('tenant.orders.cancel');
 });
     
 // Route::middleware(['auth', 'role:kasir'])->group(function () {
