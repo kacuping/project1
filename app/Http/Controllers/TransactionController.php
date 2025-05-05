@@ -10,7 +10,7 @@ class TransactionController extends Controller
 {
     public function print($id)
     {
-        $transaction = Transaction::with(['transaksiDetails.produk', 'tenant'])
+        $transaction = Transaction::with(['transactionDetails.produk', 'tenant'])
             ->findOrFail($id);
 
         $tenant = User::find($transaction->tenant_id);
@@ -19,5 +19,9 @@ class TransactionController extends Controller
             'transaction' => $transaction,
             'tenant' => $tenant
         ]);
+
+        // $tenant = $transaction->tenant;
+
+        // return view('tenant.struk', compact('transaction', 'tenant'));
     }
 }

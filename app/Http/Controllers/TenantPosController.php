@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Produk;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
-use App\Models\TransaksiDetail;
 use Illuminate\Support\Facades\Auth;
 
 class TenantPosController extends Controller

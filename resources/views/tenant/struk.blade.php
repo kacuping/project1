@@ -1,4 +1,4 @@
-<h2>Struk Pemesanan</h2>
+{{-- <h2>Struk Pemesanan</h2>
 <p>Tanggal: {{ $transaction->created_at->format('d-m-Y H:i') }}</p>
 <p>No. Order: {{ $transaction->nomor_order }}</p>
 <p>Tenant: {{ $transaction->tenant->nama }}</p>
@@ -28,4 +28,4 @@
 
 <hr>
 <p><strong>Total: Rp {{ number_format($transaction->total_harga) }}</strong></p>
-<p>Status: {{ ucfirst($transaction->status) }}</p>
+<p>Status: {{ ucfirst($transaction->status) }}</p> --}}

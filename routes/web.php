@@ -78,6 +78,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/kasir', [KasirController::class, 'index'])->name('kasir.index');
     Route::post('/kasir/{id}/proses', [KasirController::class, 'proses'])->name('kasir.proses');
 });
+
+Route::prefix('kasir')->middleware(['auth', 'role:kasir'])->group(function () {
+    Route::get('/dashboard', [KasirController::class, 'index'])->name('kasir.dashboard');
+});
     
 // Route::middleware(['auth', 'role:kasir'])->group(function () {
 //     Route::get('/kasir/transaksi-pending', [KasirController::class, 'pending']);

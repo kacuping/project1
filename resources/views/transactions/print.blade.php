@@ -63,7 +63,7 @@
 <body>
     <div class="receipt">
         <div class="header">
-            <h2>{{ $tenant->name }}</h2>
+            <h2>{{ $tenant->name ?? 'Tenant' }}</h2>
         </div>
 
         <div class="transaction-info">
@@ -89,6 +89,11 @@
 
         <div class="footer">
             <p>Terima kasih atas kunjungan Anda!</p>
+        </div>
+
+        <div class="buttons">
+            <button onclick="window.print()">Print Lagi</button>
+            <a href="{{ route('tenant.pos') }}">Kembali ke POS</a>
         </div>
     </div>
 
