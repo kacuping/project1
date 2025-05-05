@@ -8,9 +8,9 @@
     </li>
 
     <li class="menu-item {{ request()->is('kasir*') ? 'active' : '' }}">
-        <a href="{{ url('/pos-system') }}" class="menu-link">
+        <a href="{{ route('kasir.index') }}" class="menu-link">
             <i class="menu-icon bx bx-bxs-cart-add"></i>
-            <div>POS System</div>
+            <div>POS Kasir</div>
         </a>
     </li>
 

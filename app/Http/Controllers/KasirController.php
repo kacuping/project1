@@ -18,21 +18,22 @@ class KasirController extends Controller
         return response()->json($transaksi);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $transaksis = Transaction::with(['transactionDetails.produk', 'tenant'])
+        $transactions = Transaction::with('tenant')
             ->where('status', 'pending')
             ->latest()
             ->get();
 
-        return view('kasir.transaksi.index', compact('transaksis'));
+        return view('kasir.index', compact('transactions'));
     }
 
-    public function bayar($id)
+    public function proses($id)
     {
         $transaksi = Transaction::findOrFail($id);
-        $transaksi->update(['status' => 'paid']);
+        $transaksi->status = 'paid';
+        $transaksi->save();
 
-        return redirect()->route('kasir.transaksi.index')->with('success', 'Pembayaran berhasil diproses.');
+        return redirect()->route('kasir.index')->with('success', 'Transaksi berhasil diproses.');
     }
 }

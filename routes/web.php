@@ -68,9 +68,15 @@ Route::middleware(['auth'])->prefix('tenant')->name('tenant.')->group(function (
 Route::get('/tenant/transactions/{id}/print', [TransactionController::class, 'print'])
     ->name('tenant.transactions.print');
 
-Route::middleware(['auth', 'role:kasir'])->prefix('kasir')->name('kasir.')->group(function () {
-    Route::get('/pos-system', [KasirController::class, 'index'])->name('transaksi.index');
-    Route::post('/transaksi/{id}/bayar', [KasirController::class, 'bayar'])->name('transaksi.bayar');
+// Route::middleware(['auth'])->prefix('kasir')->name('kasir.')->group(function () {
+//     Route::get('/dashboard', [KasirController::class, 'index'])->name('dashboard');
+//     Route::get('/transaksi', [KasirController::class, 'index'])->name('transaksi.index');
+//     Route::post('/transaksi/{id}/bayar', [KasirController::class, 'bayar'])->name('transaksi.bayar');
+// });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/kasir', [KasirController::class, 'index'])->name('kasir.index');
+    Route::post('/kasir/{id}/proses', [KasirController::class, 'proses'])->name('kasir.proses');
 });
     
 // Route::middleware(['auth', 'role:kasir'])->group(function () {
