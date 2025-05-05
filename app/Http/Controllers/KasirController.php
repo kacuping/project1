@@ -31,9 +31,10 @@ class KasirController extends Controller
     public function proses($id)
     {
         $transaksi = Transaction::findOrFail($id);
-        $transaksi->status = 'paid';
+        $transaksi->status = 'completed';
         $transaksi->save();
 
-        return redirect()->route('kasir.index')->with('success', 'Transaksi berhasil diproses.');
+        // return redirect()->route('kasir.index')->with('success', 'Transaksi berhasil diproses.');
+        return redirect()->route('kasir.transaksi.print', $transaksi->id);
     }
 }

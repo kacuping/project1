@@ -26,7 +26,7 @@
                         <td>
                             @if ($order->status == 'pending')
                                 <span class="badge bg-warning text-dark">Pending</span>
-                            @elseif($order->status == 'dibayar')
+                            @elseif($order->status == 'completed')
                                 <span class="badge bg-success">Dibayar</span>
                             @else
                                 <span class="badge bg-danger">Dibatalkan</span>

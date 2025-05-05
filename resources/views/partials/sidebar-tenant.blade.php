@@ -20,7 +20,7 @@
 
     <li class="menu-item {{ route('tenant.orders.status') }}">
         <a href="{{ route('tenant.orders.status') }}" class="menu-link">
-            <i class="menu-icon bx bx-bxs-cart-add"></i>
+            <i class="menu-icon bx bx-bxs-comment-check"></i>
             <div>Status Order</div>
         </a>
     </li>

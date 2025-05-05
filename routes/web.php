@@ -9,6 +9,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\TenantController;
 use App\Http\Controllers\TenantPosController;
 use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\KasirTransaksiController;
 use App\Http\Controllers\TenantTransactionController;
 
 // Route::get('/', function () {
@@ -75,9 +76,12 @@ Route::get('/tenant/transactions/{id}/print', [TransactionController::class, 'pr
 //     Route::post('/transaksi/{id}/bayar', [KasirController::class, 'bayar'])->name('transaksi.bayar');
 // });
 
+Route::get('/kasir/print/{id}', [KasirTransaksiController::class, 'print'])->name('kasir.transaksi.print');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/kasir', [KasirController::class, 'index'])->name('kasir.index');
     Route::post('/kasir/{id}/proses', [KasirController::class, 'proses'])->name('kasir.proses');
+    // Route::get('/kasir/print/{id}', [KasirTransaksiController::class, 'print'])->name('kasir.transaksi.print');
 });
 
 Route::prefix('kasir')->middleware(['auth', 'role:kasir'])->group(function () {
