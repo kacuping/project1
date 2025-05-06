@@ -39,10 +39,20 @@
                                     <form method="POST" action="{{ route('tenant.orders.cancel', $order->id) }}">
                                         @csrf
                                         <button type="submit" class="btn btn-sm btn-danger">Cancel</button>
+                                        <a href="{{ route('tenant.transactions.print', $order->id) }}" target="_blank"
+                                            class="btn btn-sm btn-secondary">
+                                            <i class="menu-icon bx bx-bxs-printer"></i> Cetak Ulang
+                                        </a>
                                     </form>
+                                @elseif ($order->status == 'completed')
+                                    <a href="{{ route('tenant.transactions.print', $order->id) }}" target="_blank"
+                                        class="btn btn-sm btn-secondary">
+                                        <i class="menu-icon bx bx-bxs-printer"></i> Cetak Struk
+                                    </a>
                                 @else
                                     <button class="btn btn-sm btn-secondary" disabled>Tidak tersedia</button>
                                 @endif
+
                             </td>
                         </tr>
                     @empty

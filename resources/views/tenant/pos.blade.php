@@ -48,12 +48,12 @@
                             <span>Total:</span>
                             <span id="cart-total" class="text-success">Rp 0</span>
                         </div>
-                        <form action="{{ route('tenant.transaksi.store') }}" method="POST"
-                            onsubmit="return prepareCheckout()">
+                        <form id="checkout-form" action="{{ route('tenant.transaksi.store') }}" method="POST">
                             @csrf
                             <input type="hidden" name="items" id="cart-data">
-                            <button type="submit" class="btn btn-success w-100 mt-3">
-                                <i class="bx bx-bxs-cart-add"></i> Order
+                            <button type="button" class="btn btn-success w-100 mt-3" data-bs-toggle="modal"
+                                data-bs-target="#confirmModal">
+                                <i class="fa fa-shopping-cart me-1"></i> Order
                             </button>
                         </form>
                     </div>
@@ -62,6 +62,25 @@
         </div>
     </div>
 @endsection
+
+<!-- Modal Konfirmasi -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel">Konfirmasi Order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+            </div>
+            <div class="modal-body">
+                Apakah Anda yakin ingin melanjutkan transaksi ini?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-primary" onclick="submitOrder()">Ya, Lanjutkan</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section('scripts')
     <script>
@@ -119,9 +138,15 @@
             document.getElementById('cart-total').innerText = `Rp ${total.toLocaleString('id-ID')}`;
         }
 
+        function submitOrder() {
+            if (prepareCheckout()) {
+                document.getElementById('checkout-form').submit();
+            }
+        }
+
         function prepareCheckout() {
-            const confirmOrder = confirm("Apakah Anda yakin ingin melanjutkan transaksi?");
-            if (!confirmOrder) return false; // batal kalau user klik Cancel
+            // const confirmOrder = confirm("Apakah Anda yakin ingin melanjutkan transaksi?");
+            // if (!confirmOrder) return false; // batal kalau user klik Cancel
 
             // Menyusun data cart dari objek cart yang aktif
             const cartArray = Object.values(cart).map(item => ({
@@ -138,6 +163,10 @@
 
             document.getElementById('cart-data').value = JSON.stringify(cartArray);
             return true; // lanjut submit
+
+            // const cartData = JSON.stringify(window.cart || []);
+            // document.getElementById('cart-data').value = cartData;
+            // return true;
         }
     </script>
 @endsection

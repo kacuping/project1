@@ -14,7 +14,7 @@
                         <div class="content-left">
                             <span class="fw-medium d-block mb-1">Total Tenant</span>
                             <div class="d-flex align-items-center my-1">
-                                <h3 class="mb-0 me-2">{{ $totalTenants ?? 0 }}</h3>
+                                <h3 class="mb-0 me-2">{{ number_format($totalTenants ?? 0) }}</h3>
                             </div>
                             <small>Tenant terdaftar</small>
                         </div>
@@ -125,11 +125,11 @@
                                 </div>
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                     <div class="me-2">
-                                        <h6 class="mb-0">{{ $product->name ?? 'Produk' }}</h6>
-                                        <small class="text-muted">{{ $product->tenant ?? 'Tenant' }}</small>
+                                        <h6 class="mb-0">{{ $product->nama ?? 'Produk' }}</h6>
+                                        <small class="text-muted">{{ $product->tenant->nama ?? 'Tenant' }}</small>
                                     </div>
                                     <div class="user-progress">
-                                        <small>{{ $product->total_sold ?? 0 }} Terjual</small>
+                                        <small>{{ number_format($product->total_sold ?? 0) }} Terjual</small>
                                     </div>
                                 </div>
                             </li>
@@ -156,11 +156,10 @@
                                 </div>
                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
                                     <div class="me-2">
-                                        <h6 class="mb-0">{{ $tenant->name ?? 'Tenant' }}</h6>
-                                        <small class="text-muted">{{ $tenant->category ?? 'Kategori' }}</small>
+                                        <h6 class="mb-0">{{ $tenant->nama }}</h6>
                                     </div>
                                     <div class="user-progress">
-                                        <small>Rp {{ number_format($tenant->total_revenue ?? 0, 0, ',', '.') }}</small>
+                                        <small>Rp {{ number_format($tenant->total_revenue, 0, ',', '.') }}</small>
                                     </div>
                                 </div>
                             </li>

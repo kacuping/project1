@@ -18,37 +18,37 @@ class DashboardController extends Controller
         // Total Produk
         $totalProducts = Produk::count();
 
-        // Total Pendapatan (contoh asumsi field 'total' di tabel transaksi)
+        // Total Pendapatan Bulan Ini
         $totalRevenue = Transaction::whereMonth('created_at', Carbon::now()->month)
-            ->sum('total');
+            ->sum('total_harga');
 
         // Total Transaksi Hari Ini
         $totalTransactions = Transaction::whereDate('created_at', Carbon::today())->count();
 
         // Produk Terlaris (top 5)
         $topProducts = Produk::with('tenant')
-            ->withSum('transactions as total_sold', 'quantity')
+            ->select('produks.*')
+            ->join('transaction_details', 'produks.id', '=', 'transaction_details.produk_id')
+            ->join('transactions', 'transaction_details.transaction_id', '=', 'transactions.id')
+            ->whereMonth('transactions.created_at', Carbon::now()->month)
+            ->groupBy('produks.id')
+            ->selectRaw('SUM(transaction_details.jumlah) as total_sold')
             ->orderByDesc('total_sold')
             ->take(5)
             ->get();
 
         // Tenant Terbaik (berdasarkan total pendapatan)
-        $topTenants = Tenant::with(['products.transactions'])
-            ->get()
-            ->map(function ($tenant) {
-                $totalRevenue = $tenant->products->flatMap->transactions->sum('total');
-                return (object)[
-                    'name' => $tenant->name,
-                    'category' => $tenant->category,
-                    'total_revenue' => $totalRevenue,
-                ];
-            })
-            ->sortByDesc('total_revenue')
-            ->take(5);
+        $topTenants = Tenant::select('tenants.*')
+            ->selectRaw('SUM(transactions.total_harga) as total_revenue')
+            ->join('transactions', 'tenants.id', '=', 'transactions.tenant_id')
+            ->whereMonth('transactions.created_at', Carbon::now()->month)
+            ->groupBy('tenants.id')
+            ->orderByDesc('total_revenue')
+            ->take(5)
+            ->get();
 
         return view('dashboard', compact(
             'totalTenants',
-            'tenantGrowth',
             'totalProducts',
             'totalRevenue',
             'totalTransactions',
