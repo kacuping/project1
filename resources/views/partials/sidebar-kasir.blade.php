@@ -14,4 +14,15 @@
         </a>
     </li>
 
+    <li class="menu-header small text-uppercase">
+        <span class="menu-header-text">Order</span>
+    </li>
+
+    <li class="menu-item {{ route('kasir.status-order') }}">
+        <a href="{{ route('kasir.status-order') }}" class="menu-link">
+            <i class="menu-icon bx bx-bxs-comment-check"></i>
+            <div>Status Order</div>
+        </a>
+    </li>
+
 </ul>

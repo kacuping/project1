@@ -92,6 +92,11 @@ Route::prefix('tenant')->middleware(['auth', 'role:tenant'])->group(function () 
     Route::get('/status-order', [TenantTransactionController::class, 'index'])->name('tenant.orders.status');
     Route::post('/cancel-order/{id}', [TenantTransactionController::class, 'cancel'])->name('tenant.orders.cancel');
 });
+
+Route::middleware(['auth', 'role:kasir'])->group(function () {
+    Route::get('/kasir/status-order', [App\Http\Controllers\KasirOrderStatusController::class, 'index'])->name('kasir.status-order');
+});
+
     
 // Route::middleware(['auth', 'role:kasir'])->group(function () {
 //     Route::get('/kasir/transaksi-pending', [KasirController::class, 'pending']);

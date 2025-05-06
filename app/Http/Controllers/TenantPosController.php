@@ -34,16 +34,16 @@ class TenantPosController extends Controller
         $transaksi = Transaction::create([
             'nomor_order' => $nomorOrder,
             'tenant_id' => Auth::user()->tenant_id,
-            'total_harga' => collect($items)->sum(fn($item) => $item['qty'] * $item['price']),
+            'total_harga' => collect($items)->sum(fn($item) => $item['subtotal']),
             'status' => 'pending',
         ]);
 
         foreach ($items as $item) {
             $transaksi->transactionDetails()->create([
                 'produk_id' => $item['id'],
-                'jumlah' => $item['qty'],
-                'harga_satuan' => $item['price'],
-                'subtotal' => $item['qty'] * $item['price'],
+                'jumlah' => $item['jumlah'],
+                'harga_satuan' => $item['harga'],
+                'subtotal' => $item['subtotal'],
             ]);
         }
 

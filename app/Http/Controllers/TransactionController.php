@@ -13,15 +13,6 @@ class TransactionController extends Controller
         $transaction = Transaction::with(['transactionDetails.produk', 'tenant'])
             ->findOrFail($id);
 
-        $tenant = User::find($transaction->tenant_id);
-
-        return view('transactions.print', [
-            'transaction' => $transaction,
-            'tenant' => $tenant
-        ]);
-
-        // $tenant = $transaction->tenant;
-
-        // return view('tenant.struk', compact('transaction', 'tenant'));
+        return view('transactions.print', compact('transaction'));
     }
 }

@@ -63,7 +63,7 @@
 <body>
     <div class="receipt">
         <div class="header">
-            <h2>{{ $tenant->name ?? 'Tenant' }}</h2>
+            <h2>{{ $transaction->tenant->nama ?? 'Tenant' }}</h2>
         </div>
 
         <div class="transaction-info">

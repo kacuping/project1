@@ -38,7 +38,7 @@
 <body>
     <div class="receipt">
         <div class="center">
-            <h3>{{ $transaksi->tenant->name }}</h3>
+            <h3>{{ $transaksi->tenant->nama }}</h3>
             <p><strong>Order #{{ $transaksi->nomor_order }}</strong></p>
         </div>
 

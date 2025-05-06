@@ -53,7 +53,7 @@
                             @csrf
                             <input type="hidden" name="items" id="cart-data">
                             <button type="submit" class="btn btn-success w-100 mt-3">
-                                <i class="fa fa-shopping-cart me-1"></i> Order
+                                <i class="bx bx-bxs-cart-add"></i> Order
                             </button>
                         </form>
                     </div>
@@ -120,8 +120,24 @@
         }
 
         function prepareCheckout() {
-            document.getElementById('cart-data').value = JSON.stringify(Object.values(cart));
-            return true;
+            const confirmOrder = confirm("Apakah Anda yakin ingin melanjutkan transaksi?");
+            if (!confirmOrder) return false; // batal kalau user klik Cancel
+
+            // Menyusun data cart dari objek cart yang aktif
+            const cartArray = Object.values(cart).map(item => ({
+                id: item.id,
+                jumlah: item.qty,
+                harga: item.price,
+                subtotal: item.qty * item.price
+            }));
+
+            if (cartArray.length === 0) {
+                alert('Keranjang masih kosong!');
+                return false;
+            }
+
+            document.getElementById('cart-data').value = JSON.stringify(cartArray);
+            return true; // lanjut submit
         }
     </script>
 @endsection

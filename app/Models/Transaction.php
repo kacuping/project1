@@ -45,5 +45,16 @@ class Transaction extends Model
         $date = now()->format('Ymd');
         $last = self::whereDate('created_at', now())->count() + 1;
         return 'ORD-' . $date . '-' . str_pad($last, 4, '0', STR_PAD_LEFT);
+
+        // $date = now()->format('Ymd');
+        // $last = self::whereDate('created_at', now())->count() + 1;
+
+        // do {
+        //     $nomorOrder = 'ORD-' . $date . '-' . str_pad($last, 4, '0', STR_PAD_LEFT);
+        //     $last++;
+        // } while (self::where('nomor_order', $nomorOrder)->exists());
+
+        // return $nomorOrder;
+        // return 'ORD-' . $date . '-' . str_pad($last, 4, '0', STR_PAD_LEFT);
     }
 }

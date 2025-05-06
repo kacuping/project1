@@ -37,7 +37,7 @@ class TenantOrderController extends Controller
 
             DB::commit();
 
-            return redirect()->route('tenant.tenant.struk', $transaction->id);
+            return redirect()->route('tenant.transactions.print', $transaction->id);
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->withErrors(['error' => $e->getMessage()]);
