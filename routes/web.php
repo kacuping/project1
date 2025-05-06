@@ -81,7 +81,7 @@ Route::get('/kasir/print/{id}', [KasirTransaksiController::class, 'print'])->nam
 Route::middleware(['auth'])->group(function () {
     Route::get('/kasir', [KasirController::class, 'index'])->name('kasir.index');
     Route::post('/kasir/{id}/proses', [KasirController::class, 'proses'])->name('kasir.proses');
-    // Route::get('/kasir/print/{id}', [KasirTransaksiController::class, 'print'])->name('kasir.transaksi.print');
+    Route::get('/kasir/struk/{id}', [App\Http\Controllers\KasirOrderStatusController::class, 'print'])->name('kasir.order.print');
 });
 
 Route::prefix('kasir')->middleware(['auth', 'role:kasir'])->group(function () {

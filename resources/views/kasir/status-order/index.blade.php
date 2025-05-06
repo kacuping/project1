@@ -13,6 +13,7 @@
                         <th>Total</th>
                         <th>Tanggal</th>
                         <th>Status</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -23,8 +24,16 @@
                             <td>Rp {{ number_format($trx->total_harga) }}</td>
                             <td>{{ $trx->created_at->format('d-m-Y H:i') }}</td>
                             <td><span class="badge bg-success">{{ ucfirst($trx->status) }}</span></td>
+                            <td>
+                                <a href="{{ route('kasir.order.print', $trx->id) }}" target="_blank"
+                                    class="btn btn-sm btn-secondary">
+                                    <i class="menu-icon bx bx-bxs-printer"></i> Cetak ulang
+                                </a>
+                            </td>
                         </tr>
                     @endforeach
+
+
                 </tbody>
             </table>
         </div>
