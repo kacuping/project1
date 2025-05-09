@@ -20,10 +20,24 @@ class KasirController extends Controller
 
     public function index(Request $request)
     {
+        $keyword = $request->query('q');
+
+        $transactions = Transaction::with(['tenant', 'transactionDetails.produk'])
+            ->when($keyword, function ($query, $keyword) {
+                $query->where('nomor_order', 'like', "%{$keyword}%")
+                    ->orWhereHas('tenant', fn($q) => $q->where('nama', 'like', "%{$keyword}%"));
+            })
+            ->latest()
+            ->paginate(9)
+            ->withQueryString();
+
+
+
         $transactions = Transaction::with('tenant')
             ->where('status', 'pending')
             ->latest()
-            ->get();
+            // ->get();
+            ->paginate(9);
 
         return view('kasir.index', compact('transactions'));
     }

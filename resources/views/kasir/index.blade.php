@@ -88,6 +88,14 @@
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
 
+        <form class="mb-3" method="GET">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Cari nomor order atau tenant..."
+                    value="{{ request('q') }}">
+                <button class="btn btn-primary" type="submit">Cari</button>
+            </div>
+        </form>
+
         <div class="row">
             <!-- Daftar Produk -->
             <div class="col-md-8">
@@ -106,8 +114,9 @@
                                         <div class="card-header bg-primary text-white">
                                             <div class="d-flex justify-content-between">
                                                 <span><strong>{{ $order->nomor_order }}</strong></span>
-                                                <span>{{ $order->tenant->name }}</span>
+                                                {{-- <span>{{ $order->tenant->nama }}</span> --}}
                                             </div>
+                                            <span>{{ $order->tenant->nama }}</span>
                                         </div>
 
                                         <div class="card-body">
@@ -132,10 +141,17 @@
                                     </div>
                                 </div>
                             @endforeach
+                            <div class="d-flex justify-content-center mt-4">
+                                {{ $transactions->withQueryString()->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            {{-- <div class="d-flex justify-content-center mt-4">
+                {{ $transactions->withQueryString()->links() }}
+            </div> --}}
 
             <!-- Cart -->
             <div class="col-md-4">
