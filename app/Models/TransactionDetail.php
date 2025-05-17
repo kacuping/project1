@@ -28,4 +28,9 @@ class TransactionDetail extends Model
     {
         return $this->belongsTo(Transaction::class);
     }
+
+    public function tenant()
+    {
+        return $this->belongsTo(Tenant::class, 'tenant_id');
+    }
 }

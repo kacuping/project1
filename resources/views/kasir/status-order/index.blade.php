@@ -29,6 +29,7 @@
                                     class="btn btn-sm btn-secondary">
                                     <i class="menu-icon bx bx-bxs-printer"></i> Cetak ulang
                                 </a>
+                                <a class="btn btn-sm btn-primary"><i class="menu-icon bx bx-bxs-printer"></i> Detail</a>
                             </td>
                         </tr>
                     @endforeach

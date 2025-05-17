@@ -20,10 +20,10 @@ class Transaction extends Model
     ];
 
 
-    // public function details()
-    // {
-    //     return $this->hasMany(TransactionDetail::class, 'transaction_id');
-    // }
+    public function details()
+    {
+        return $this->hasMany(TransactionDetail::class, 'transaction_id');
+    }
 
     public function transactionDetails(): HasMany
     {
@@ -45,6 +45,9 @@ class Transaction extends Model
         $date = now()->format('Ymd');
         $last = self::whereDate('created_at', now())->count() + 1;
         return 'ORD-' . $date . '-' . str_pad($last, 4, '0', STR_PAD_LEFT);
+
+        $strukId = 'STRK-' . now()->format('Ymd') . '-' . str_pad($transaction->id, 3, '0', STR_PAD_LEFT);
+
 
         // $date = now()->format('Ymd');
         // $last = self::whereDate('created_at', now())->count() + 1;
